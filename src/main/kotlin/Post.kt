@@ -12,6 +12,21 @@ data class Post(
     val likes: Like,
     val reposts: Repost,
     val canDelete: Boolean = true,
-    val canEdit: Boolean = true
+    val canEdit: Boolean = true,
+    val attachments: Array<Attachment> = emptyArray()
 ) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Post
+
+        if (!attachments.contentEquals(other.attachments)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return attachments.contentHashCode()
+    }
 }
