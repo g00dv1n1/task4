@@ -13,7 +13,7 @@ data class Post(
     val reposts: Repost,
     val canDelete: Boolean = true,
     val canEdit: Boolean = true,
-    val attachments: Array<Attachment> = emptyArray()
+    val attachments: Array<Attachment>? = emptyArray()
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
