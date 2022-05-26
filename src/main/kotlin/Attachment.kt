@@ -1,12 +1,23 @@
-abstract class Attachment
+abstract class Attachment(open val type: String) {
+}
 
-class AudioAttachment(val audio: Audio) : Attachment()
-class DocumentAttachment(val doc: Document) : Attachment()
-class PhotoAttachment(val photo: Photo) : Attachment()
-class VideoAttachment(val video: Video) : Attachment()
-class NoteAttachment(val note: Note) : Attachment()
+class AudioAttachment(val audio: Audio, type: String): Attachment(type){
+    override val type: String = "audio"
+}
+class DocumentAttachment(val doc: Document, type: String) : Attachment(type){
+    override val type: String = "document"
+}
+class PhotoAttachment(val photo: Photo, type: String) : Attachment(type){
+    override val type: String = "photo"
+}
+class VideoAttachment(val video: Video, type: String) : Attachment(type){
+    override val type: String = "video"
+}
+class NoteAttachment(val note: Note, type: String) : Attachment(type){
+    override val type: String = "note"
+}
 
-class Note (val id: Int,
+data class Note (val id: Int,
             val ownerId: Int,
             val title: String,
             val text: String,
@@ -17,7 +28,7 @@ class Note (val id: Int,
 ) {
 }
 
-class Video(val vid: Int,
+data class Video(val vid: Int,
             val ownerId: Int,
             val title: String,
             val description: String,
@@ -30,7 +41,7 @@ class Video(val vid: Int,
 ) {
 }
 
-class Photo(val id: Int,
+data class Photo(val id: Int,
             val albumId: Int,
             val ownerId: Int,
             val userId: Int,
@@ -45,7 +56,7 @@ class Photo(val id: Int,
 class Size {
 }
 
-class Document(val id: Int,
+data class Document(val id: Int,
                val ownerId: Int,
                val title: String,
                val size: Int,
@@ -57,7 +68,7 @@ class Document(val id: Int,
 }
 
 
-class Audio(val id: Int,
+data class Audio(val id: Int,
             val ownerId: Int,
             val artist: String,
             val title: String,
