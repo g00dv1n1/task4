@@ -8,7 +8,7 @@ data class Post(
     val replyOwnedId: Int? = 0,
     val replyPostId: Int? = 0,
     val friendsOnly: Boolean = true,
-    val comments: Comment,
+    val comments: Array<Comment>? = emptyArray(),
     val likes: Like,
     val reposts: Repost,
     val canDelete: Boolean = true,

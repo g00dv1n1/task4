@@ -9,7 +9,7 @@ class WallServiceTest {
         val like = Like()
         val comment = Comment()
         val repost = Repost()
-        val post = Post(id = 1, likes = like, reposts = repost, comments = comment)
+        val post = Post(id = 1, likes = like, reposts = repost)
         val expectedCode = 1
 
         val expectedPost = WallService.add(post)
@@ -24,8 +24,8 @@ class WallServiceTest {
         val comment = Comment()
         val repost = Repost()
 
-        val post = Post(id = 1, likes = like, reposts = repost, comments = comment)
-        val newPost = Post(id = 1, likes = like, reposts = repost, comments = comment)
+        val post = Post(id = 1, likes = like, reposts = repost)
+        val newPost = Post(id = 1, likes = like, reposts = repost)
 
         WallService.add(post)
         val result = WallService.update(newPost)
@@ -38,11 +38,35 @@ class WallServiceTest {
         val comment = Comment()
         val repost = Repost()
 
-        val post = Post(id = 1, likes = like, reposts = repost, comments = comment)
-        val newPost = Post(id = 2, likes = like, reposts = repost, comments = comment)
+        val post = Post(id = 1, likes = like, reposts = repost)
+        val newPost = Post(id = 2, likes = like, reposts = repost)
 
         WallService.add(post)
         val result = WallService.update(newPost)
         assertFalse(result)
+    }
+
+    @Test
+    fun createTrue() {
+        val like = Like()
+        val comment = Comment()
+        val repost = Repost()
+
+        val post = Post(id = 1, likes = like, reposts = repost)
+
+        WallService.add(post)
+        WallService.createComment(postId = 1,comment=comment)
+    }
+
+    @Test (expected = PostNotFoundException::class)
+    fun createFalse() {
+        val like = Like()
+        val comment = Comment()
+        val repost = Repost()
+
+        val post = Post(id = 1, likes = like, reposts = repost)
+
+        WallService.add(post)
+        WallService.createComment(postId = 2,comment=comment)
     }
 }
